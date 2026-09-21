@@ -1,0 +1,42 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+!frontend/.env.example
+!backend/.env.example
+frontend/.env.local
+backend/.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.uv-cache/
+.pytest_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+
+# Build and caches
+dist/
+build/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+
+# Generated data and models
+data/
+artifacts/
+models/
+*.pt
+*.pth
+*.ckpt
