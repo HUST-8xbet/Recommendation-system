@@ -36,6 +36,28 @@ npm run dev
 
 The frontend expects `NEXT_PUBLIC_API_BASE_URL` to point at the backend, for example `http://localhost:8000`.
 
+### Backend catalog local gate
+
+Run these commands from `backend/`:
+
+```bash
+# Unit tests only (does not require Docker or Supabase)
+uv run pytest -m "not integration"
+
+# Integration tests; provide local Supabase values explicitly, never production values
+SUPABASE_URL=http://127.0.0.1:54321 SUPABASE_PUBLISHABLE_KEY="<local-anon-key>" \
+  uv run pytest -m integration
+
+# Full local gate (integration test skips when local Supabase is unavailable)
+uv run pytest
+uv run ruff check .
+uv run ruff format --check .
+python -m compileall app tests
+git diff --check
+```
+
+The integration test does not start Supabase, apply migrations, or seed data. Prepare the local instance separately with `supabase start` and `supabase db reset`; the test only connects to loopback and skips clearly when the local API is unavailable or credentials are not supplied.
+
 ## Environment
 
 Commit only `.env.example` files. Do not commit real `.env`, `.env.local`, service-role keys, database passwords, provider tokens, or object storage credentials.

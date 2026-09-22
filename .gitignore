@@ -36,7 +36,7 @@ htmlcov/
 # Generated data and models
 data/
 artifacts/
-models/
+/models/
 *.pt
 *.pth
 *.ckpt

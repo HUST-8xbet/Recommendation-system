@@ -6,6 +6,7 @@ requires-python = ">=3.10"
 dependencies = [
     "fastapi==0.117.1",
     "pydantic-settings==2.10.1",
+    "supabase==2.18.1",
     "uvicorn[standard]==0.35.0",
 ]
 
@@ -14,8 +15,12 @@ dev = [
     "httpx==0.28.1",
     "pytest==8.4.2",
     "pytest-asyncio==1.2.0",
+    "ruff>=0.16.8",
 ]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
+markers = [
+    "integration: requires a running local Supabase instance; never uses cloud",
+]

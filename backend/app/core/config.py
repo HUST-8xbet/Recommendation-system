@@ -7,12 +7,18 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     app_name: str = "Music Recommendation API"
     backend_cors_origins: str = Field(default="http://localhost:3000")
+    supabase_url: str | None = None
+    supabase_publishable_key: str | None = None
 
     model_config = SettingsConfigDict(extra="ignore")
 
     @property
     def cors_origins(self) -> list[str]:
-        return [origin.strip() for origin in self.backend_cors_origins.split(",") if origin.strip()]
+        return [
+            origin.strip()
+            for origin in self.backend_cors_origins.split(",")
+            if origin.strip()
+        ]
 
 
 @lru_cache
