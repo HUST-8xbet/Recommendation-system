@@ -23,7 +23,9 @@ uv run uvicorn app.main:app --reload
 ```
 
 The backend serves `GET /health` on `http://localhost:8000/health`.
-Set backend environment variables from `backend/.env.example` in the process environment when overriding defaults.
+The backend automatically reads `backend/.env` using a path relative to its own source file, so the terminal may be started from the repository root or from `backend/`; running `source .env` is not required. Operating-system environment variables override values from that file. Copy `backend/.env.example` when setting up a new checkout, and never commit `.env` files.
+
+Use `/health` as the liveness check. Catalog requests return a generic `503` when the Supabase URL or publishable key is missing; no credential is included in the response.
 
 ### Frontend
 

@@ -40,3 +40,6 @@ artifacts/
 *.pt
 *.pth
 *.ckpt
+
+supabase/.temp/
+supabase/.branches/
