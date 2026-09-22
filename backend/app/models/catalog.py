@@ -8,7 +8,6 @@ class AlbumSummary(BaseModel):
     id: UUID
     source_provider: str
     external_id: str
-    album_id: UUID | None = None
     title: str
     album_type: str | None = None
     cover_url: str | None = None

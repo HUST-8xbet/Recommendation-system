@@ -168,8 +168,28 @@ async def test_list_songs(fake_repository: FakeCatalogRepository) -> None:
     assert response.status_code == 200
     body = response.json()
     assert body[0]["id"] == str(SONG_ID)
+    assert body[0]["album"] is not None
+    assert set(body[0]["album"]) == {
+        "id",
+        "title",
+        "source_provider",
+        "external_id",
+        "album_type",
+        "cover_url",
+        "release_date",
+        "external_url",
+    }
+    assert body[0]["album"]["id"] == str(ALBUM_ID)
     assert body[0]["album"]["title"] == "City Lights"
+    assert body[0]["album"]["source_provider"] == "demo"
+    assert body[0]["album"]["external_id"] == "album-city-lights"
+    assert body[0]["album"]["album_type"] == "album"
+    assert body[0]["album"]["cover_url"] is None
+    assert body[0]["album"]["release_date"] == "2025-02-14"
+    assert body[0]["album"]["external_url"] is None
+    assert "album_id" not in body[0]["album"]
     assert body[0]["artists"][0]["name"] == "Aurora Lane"
+    assert body[0]["artists"][0]["artist_order"] == 0
     assert "raw_metadata" not in body[0]
     assert fake_repository.list_songs_kwargs == {
         "limit": 20,
